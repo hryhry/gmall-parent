@@ -23,7 +23,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
 
-        String moduleName = "ums";
+        String moduleName = "pms";
 
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -40,12 +40,13 @@ public class CodeGenerator {
         gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
         gc.setSwagger2(true);//开启Swagger2模式
         gc.setBaseColumnList(true);
+        gc.setBaseResultMap(true); //生成每个xml的baseResultMap
 
         mpg.setGlobalConfig(gc);
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.199.110:3307/gmall_ums?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://192.168.199.110:3307/gmall_pms?useUnicode=true&useSSL=false&characterEncoding=utf8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");

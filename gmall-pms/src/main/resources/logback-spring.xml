@@ -18,9 +18,15 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
+
+
     <!--输出到logstash的appender-->
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+
+
         <destination>192.168.199.110:4560</destination>
+
+
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
     <root>
