@@ -39,10 +39,11 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
     * */
     @Override
     public List<PmsProductCategoryWithChildrenItem> listCatelogWithChilder(Integer i) {
+        //先去缓存中查
         Object cacheMenu = redisTemplate.opsForValue().get(CATEGORY_MENU_CACHE_KEY);
         List<PmsProductCategoryWithChildrenItem> items = null;
         if ( cacheMenu != null) {
-            //缓存中有了
+            //缓存中有
             log.debug("菜单数据命中缓存.......");
             items = (List<PmsProductCategoryWithChildrenItem>) cacheMenu;
         } else {

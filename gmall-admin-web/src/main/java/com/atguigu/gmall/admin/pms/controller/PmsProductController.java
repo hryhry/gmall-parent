@@ -9,6 +9,7 @@ import com.atguigu.gmall.vo.product.PmsProductParam;
 import com.atguigu.gmall.vo.product.PmsProductQueryParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
 /**
  * 商品管理Controller
  */
+@Log4j2
 @CrossOrigin   //可以跨域
 @RestController
 @Api(tags = "PmsProductController", description = "商品管理")
@@ -27,9 +29,14 @@ public class PmsProductController {
 
     @ApiOperation("创建商品")
     @PostMapping(value = "/create")
-    public Object create(@RequestBody PmsProductParam productParam,
-                         BindingResult bindingResult) {
+    public Object create(@RequestBody PmsProductParam productParam) {
         //TODO 查询所有一级分类及子分类
+
+        //log.debug("创建将要保存的商品数据是：{}", productParam);
+        log.debug("当前线程....{}-->{}", Thread.currentThread().getId(),Thread.currentThread().getName());
+        productService.saveProduct(productParam);
+
+
         return new CommonResult().success(null);
     }
 
@@ -81,6 +88,9 @@ public class PmsProductController {
     public Object updatePublishStatus(@RequestParam("ids") List<Long> ids,
                                      @RequestParam("publishStatus") Integer publishStatus) {
         //TODO 批量上下架
+        productService.updatePublishStatus(ids, publishStatus);
+
+
         return new CommonResult().success(null);
     }
 
